@@ -38,7 +38,8 @@ def parse_logging_args() -> Tuple[str, bool]:
     args = parser.parse_args()
 
     # If the --all_tasks flag is set, then task_num is set to 0 which signals the TaskScorer to score all the tasks.
-    task_num = "0" if args.all_tasks else args.task_num 
+    # If arg.task_num is not given and --all_tasks is not set, task_num is set to 0.
+    task_num = "0" if (args.all_tasks or (args.task_num is None)) else args.task_num
 
     return task_num, args.verbose
 
@@ -66,7 +67,7 @@ def load_task_data(task_name: str) -> list:
     Returns:
         list: Combined list of all examples in the specified task.
     """
-    
+
     with open (os.path.join(DATA_DIR, f"{task_name}.json"), "r") as task_file:
         task_json = json.load(task_file)
     return task_json["train"] + task_json["test"] + task_json["arc-gen"]
