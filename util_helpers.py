@@ -18,7 +18,7 @@ def parse_visualization_args() -> str:
     """
 
     parser = argparse.ArgumentParser(description="Visualize tasks with interactive plots.")
-    parser.add_argument("task_num", type=_validate_task_num, help="Task number (e.g. 1 for task001)")
+    parser.add_argument("task_num", type=_validate_task_num, help="Task number (e.g. 1 for task001)",)
 
     return parser.parse_args().task_num
 

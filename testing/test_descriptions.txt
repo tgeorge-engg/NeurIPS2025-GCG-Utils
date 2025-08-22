@@ -1,0 +1,167 @@
+Test Descriptions
+======================
+
+This file describes the provided test tasks and their corresponding solution behaviors, as well as the recommended tests to run.
+The goal of these tests is to demonstrate how the utility scripts (visualization and scoring) behave under a variety of scenarios.  
+
+--------------------------------------------------------------------------------
+Task Groups
+--------------------------------------------------------------------------------
+Each task group shares the same dataset.
+
+Dataset 1: Tasks 1–3, 7–9:
+    - The input is a 3 x 3 matrix filled with a number n; the output is a 3 x 3 matrix filled with n+1.
+
+Dataset 2: Tasks 4–6:
+    - The input is an n x n matrix filled with a number n-1; the output is an n x n matrix filled with n.
+
+--------------------------------------------------------------------------------
+Test Cases
+--------------------------------------------------------------------------------
+Task 1 — Correct Solution
+    - The solution solves the task for all input-output pairs.
+
+    - Visualization (via score_tasks.py): 
+        - The output and result should show the same matrix for all pairs.
+
+    - Scoring/Logging: 
+        - The solution should receive a score above 0.001.
+
+        - When scoring as a single task:
+            - "Percent Correct" should be 100.
+            - "Correctly solved" should be 3/3 and should have 3 elements in its input-output index list.
+            - "Incorrectly solved" should be 0/3 and its input-output index list should be empty.
+            - "Crashed" should be 0/3 and its input-output index list should be empty.
+
+----------------------------------------
+Task 2 — Partially Correct Solution
+    - The solution solves the task for only the input-output pair at index 1.
+
+    - Visualization: 
+        - The output and result should show the same matrix for only the pair at index 1.
+
+    - Scoring/Logging: 
+        - The solution should receive a score of 0.001.
+
+        - When scoring as a single task:
+            - "Percent Correct" should be 33.33.
+            - "Correctly solved" should be 1/3 and should have 1 element in its input-output index list.
+            - "Incorrectly solved" should be 2/3 and should have 2 elements in its input-output index list.
+            - "Crashed" should be 0/3 and its input-output index list should be empty.
+
+----------------------------------------
+Task 3 — Incorrect Solution
+    - The solution doesn't solve the task for any input-output pair.
+
+    - Visualization: 
+        - The output and result should not show the same matrix for any pair.
+
+    - Scoring/Logging: 
+        - The solution should receive a score of 0.001.
+
+        - When scoring as a single task:
+            - "Percent Correct" should be 0.
+            - "Correctly solved" should be 0/3 and its input-output index list should be empty.
+            - "Incorrectly solved" should be 3/3 and should have 3 elements in its input-output index list.
+            - "Crashed" should be 0/3 and its input-output index list should be empty.
+
+----------------------------------------
+Task 4 — Solves some pairs correctly but crashes on the rest
+    - The solution solves the task for only the input-output pair at index 2 and crashes on the rest.
+
+    - Visualization: 
+        - The output and result should show the same matrix for only the pair at index 2; the rest should be matrices filled with 0/black.
+
+    - Scoring/Logging: 
+        - The solution should receive a score of 0.001.
+
+        - When scoring as a single task:
+            - "Percent Correct" should be 33.33.
+            - "Correctly solved" should be 1/3 and should have 1 element in its input-output index list.
+            - "Incorrectly solved" should be 0/3 and its input-output index list should be empty.
+            - "Crashed" should be 2/3 and should have 2 elements in its input-output index list.
+                - When the --verbose flag is used, each index should show the error that caused the crash.
+
+----------------------------------------
+Task 5 — Solves some pairs inorrectly but crashes on the rest
+    - The solution solves the task incorrectly for only the input-output pair at index 2 and crashes on the rest.
+
+    - Visualization: 
+        - The output and result should show a different matrix for only the pair at index 2; the rest should be matrices filled with 0/black.
+
+    - Scoring/Logging: 
+        - The solution should receive a score of 0.001.
+
+        - When scoring as a single task:
+            - "Percent Correct" should be 0.
+            - "Correctly solved" should be 0/3 and its input-output index list should be empty.
+            - "Incorrectly solved" should be 1/3 and should have 1 element in its input-output index list.
+            - "Crashed" should be 2/3 and should have 2 elements in its input-output index list.
+                - When the --verbose flag is used, each index should show the error that caused the crash.
+
+----------------------------------------
+Task 6 — Solves some pairs correctly, some incorrectly, and crashes on the rest
+    - The solution solves the task correctly for the input-output pair at index 1, incorrectly for the pair at index 2, and crashes on the rest.
+
+    - Visualization: 
+        - The output and result should show the same matrix for the pair at index 1, a different matrix for the pair at index 2, and a matrix filled with 0/black for the rest.
+
+    - Scoring/Logging: 
+        - The solution should receive a score of 0.001.
+
+        - When scoring as a single task:
+            - "Percent Correct" should be 0.
+            - "Correctly solved" should be 1/3 and should have 1 element in its input-output index list.
+            - "Incorrectly solved" should be 1/3 and should have 1 element in its input-output index list.
+            - "Crashed" should be 1/3 and should have 1 element in its input-output index list.
+                - When the --verbose flag is used, each index should show the error that caused the crash.
+
+----------------------------------------
+Task 7 — Crashes on all pairs
+    - The solution encounters an error on all input-output pairs.
+
+    - Visualization: 
+        - The output and result should show a matrix filled with 0/black for all pairs.
+
+    - Scoring/Logging: 
+        - The solution should receive a score of 0.001.
+
+        - When scoring as a single task:
+            - "Percent Correct" should be 0.
+            - "Correctly solved" should be 0/3 and its input-output index list should be empty.
+            - "Incorrectly solved" should be 0/3 and its input-output index list should be empty.
+            - "Crashed" should be 3/3 and should have 3 elements in its input-output index list.
+                - When the --verbose flag is used, each index should show the error that caused the crash.
+
+----------------------------------------
+Task 8 — Solution function incorrectly named
+    - The solution exists however it is incorrectly named, and thus cannot receive a score.
+
+    - Visualization: 
+        - Since the solution function cannot be loaded, only an error message shows.
+
+    - Scoring/Logging: 
+        - Since the solution function cannot be loaded, only an error message shows.
+
+----------------------------------------
+Task 9 — Unattempted solution
+    - This will only show up in the results_log; unattempted tasks have no visualization or individual scoring/logging.
+
+--------------------------------------------------------------------------------
+Results Log
+--------------------------------------------------------------------------------
+In the results log (logs/results_log.txt), you should see:
+    1. A score above 0.4 (400 x 0.001); the log says that there are 400 total tasks because this is a hard coded value.
+    2. 1 correctly solved task.
+    3. 2 incorrectly solved tasks.
+    4. 5 crashed tasks.
+    5. 392 unattempted tasks.
+
+--------------------------------------------------------------------------------
+Recommended tests
+--------------------------------------------------------------------------------
+visualize_test.py (1-9)
+
+score_tasks.py (1-8) (with and without --verbose)
+
+score_tasks.py --all_tasks (with and without --verbose)
