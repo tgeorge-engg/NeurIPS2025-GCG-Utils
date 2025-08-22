@@ -44,6 +44,7 @@ pip install -r requirements.txt
 | `testing/test_data`             | Directory containing the task json files used for testing. |
 | `testing/test_task_solutions`   | Directory containing the task solution files used for testing. |
 | `testing/test_descriptions.txt` | File containing descriptions of the provided test tasks and solutions. |
+
 <sup>*</sup> Not included in this repository.
 
 ## Config
