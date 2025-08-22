@@ -100,7 +100,7 @@ python3 score_tasks.py --all_tasks --verbose
 ```
 
 ## Testing
-In the testing folder you will find toy test tasks [testing/test_data](testing/test_data) and solutions to said tasks [testing/test_task_solutions](testing/test_task_solutions). In order to show the behaviour of the scripts in various situations, not all of the solutions solve the task correctly. A more complete description of the tests and the expected outputs can be found in [testing/test_descriptions.txt](testing/test_descriptions.txt).
+In the testing folder you will find toy test tasks ([testing/test_data](testing/test_data)) and solutions to said tasks ([testing/test_task_solutions](testing/test_task_solutions)). In order to show the behaviour of the scripts in various situations, not all of the solutions solve the task correctly. A more complete description of the tests and the expected outputs can be found in [testing/test_descriptions.txt](testing/test_descriptions.txt).
 
 In order to test the scripts with the provided test tasks, you must first set the following in [config.py](config.py):
 
