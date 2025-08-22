@@ -7,7 +7,6 @@ Scores and logs the results of a single task or all tasks at once.
 import glob
 import os
 import importlib
-import ast
 from collections.abc import Callable
 from typing import Tuple, Optional
 
@@ -174,14 +173,12 @@ class TaskScorer:
         """
 
         task_module = importlib.import_module(f"{SOLUTION_DIR_NAME}.{task_name}")
-        with open(os.path.join(SOLUTION_DIR, f"{task_name}.py"), "r") as solution_file:
-            solution_code = solution_file.read()
-        
-        tentative_score = max(1, 2500-len(solution_code))
-        solution_code_tree = ast.parse(solution_code)
-        functions = {node.name: getattr(task_module, node.name) for node in solution_code_tree.body if isinstance(node, ast.FunctionDef)}
+        solution_size = os.path.getsize(os.path.join(SOLUTION_DIR,f"{task_name}.py"))
+        tentative_score = max(1, 2500-solution_size)
+        main_solution_function = getattr(task_module, SOLUTION_FUNCTION_NAME)
 
-        main_solution_function = functions.get(SOLUTION_FUNCTION_NAME)
+        if not callable(main_solution_function):
+            print(f"Error; the function {SOLUTION_FUNCTION_NAME} is not a function.")
 
         return tentative_score, main_solution_function
     
